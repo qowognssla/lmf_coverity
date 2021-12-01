@@ -1,0 +1,3 @@
+Native Compiler and extra args: ./ 
+Working directory: /home/B210384/source/00.telechips/01.tcc803x/build-autolinux
+Comptype: gcc

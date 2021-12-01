@@ -124,13 +124,16 @@ while (( "$#" )); do
             ;;
         -a|--analysis)
             if [ -d $IDIR_DIR ]; then
-                cov-analyze --dir $IDIR_DIR --disable-default \
+                COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
                 --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-210714.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
-                --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf \
-                @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt
+                @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"
+                if [ ! -d "/home/coverity" ]; then
+                    COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf"
+                fi
+                cov-analyze $COV_ANALYZE_OPTIONS
             else
                 echo "the captured directory not exist"
             fi

@@ -84,8 +84,8 @@ while (( "$#" )); do
                 if [ -d $IDIR_DIR ]; then
                     rm -rf $IDIR_DIR
                 fi
-                BUILD_CMD=`./build-all-script.sh 3`
-                CLEAN_CMD=`./build-all-script.sh 3c`
+                BUILD_CMD="./build-all-script.sh 3"
+                CLEAN_CMD="./build-all-script.sh 3c"
                 
                 echo Build CMD :  $BUILD_CMD
                 eval Clean CMD : $CLEAN_CMD

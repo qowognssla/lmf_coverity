@@ -2,7 +2,8 @@
 
 CODE_BASE_DIR=`pwd`
 HERE=$(dirname $(realpath $0))
-IDIR_DIR=$CODE_BASE_DIR/idir
+IDIR_NAME=idir_kernel
+IDIR_DIR=$CODE_BASE_DIR/$IDIR_NAME
 ALPINE_COVERITY_DIR=$HERE/alpine_coverity
 COVERITY_PLUGIN_DIR=$HOME/.synopsys/desktop/controller/logs
 CONFIGS_DIR=$ALPINE_COVERITY_DIR/configs/latest-release
@@ -89,7 +90,7 @@ while (( "$#" )); do
                 
                 eval $CLEAN_CMD
                 
-                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml $BUILD_CMD
+                cov-build --dir $IDIR_NAME  --emit-complementary-info --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml $BUILD_CMD
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
                     rm -rf $PLUGIN_IDIR_PATH
@@ -118,7 +119,7 @@ while (( "$#" )); do
             ;;
         -a|--analysis)
             if [ -d $IDIR_DIR ]; then
-                COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
+                COV_ANALYZE_OPTIONS="--dir $IDIR_NAME --disable-default \
                 --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-210714.config \
@@ -136,10 +137,10 @@ while (( "$#" )); do
         -e|--commit)
             if [ -d $IDIR_DIR ]; then
                 if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
-                    cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $2
+                    cov-commit-defects --dir $IDIR_NAME --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $2
                 else
                     #echo "Error: Argument for $1 is missing" >&2
-                    cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $STREAM_ID
+                    cov-commit-defects --dir $IDIR_NAME --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $STREAM_ID
                 fi
             else
                 echo "the captured directory not exist"
@@ -148,15 +149,15 @@ while (( "$#" )); do
             ;;
         -f|--filter)
             if [ $2 == "get" ]; then 
-                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
+                cov-manage-findings --dir $IDIR_NAME --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
                 chmod 777 my_findings_report_output.xlsx
             fi
 
             if [ $2 == "check" ]; then 
-                cov-manage-findings --dir $IDIR_DIR --priority-filter my_findings_report_output_up.xlsx --action readFromReport --report my_findings_report_output_test.xlsx
+                cov-manage-findings --dir $IDIR_NAME --priority-filter my_findings_report_output_up.xlsx --action readFromReport --report my_findings_report_output_test.xlsx
             fi
             if [ $2 == "set" ]; then 
-                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action sendToConnect --priority-filter my_findings_report_output_up.xlsx
+                cov-manage-findings --dir $IDIR_NAME --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action sendToConnect --priority-filter my_findings_report_output_up.xlsx
             fi
             exit 1
             ;;

@@ -125,6 +125,7 @@ while (( "$#" )); do
         -a|--analysis)
             if [ -d $IDIR_DIR ]; then
                 COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
+                --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-210714.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \

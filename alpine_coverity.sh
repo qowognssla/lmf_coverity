@@ -87,8 +87,7 @@ while (( "$#" )); do
                 BUILD_CMD="./build-all-script.sh 3"
                 CLEAN_CMD="./build-all-script.sh 3c"
                 
-                echo Build CMD :  $BUILD_CMD
-                eval Clean CMD : $CLEAN_CMD
+                eval $CLEAN_CMD
                 
                 cov-build --dir $IDIR_DIR  --emit-complementary-info --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml $BUILD_CMD
                 

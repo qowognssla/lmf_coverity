@@ -78,4 +78,3 @@
 --enable=WRAPPER_ESCAPE
 --enable=WRITE_CONST_FIELD
 --enable=Y2K38_SAFETY
---enable-parse-warnings

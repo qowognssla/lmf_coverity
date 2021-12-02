@@ -73,7 +73,7 @@ while (( "$#" )); do
                 fi
                 
                 echo setting up tc_coverity directory
-                ln -s $HERE/tc_coverity $CODE_BASE_DIR/tc_coverity
+                ln -s $HERE/alpine_coverity $CODE_BASE_DIR/alpine_coverity
 
             else   
                 echo "${RED}Error: there are no conf file in tc_coverity directory${NC}"
@@ -86,8 +86,9 @@ while (( "$#" )); do
                     rm -rf $IDIR_DIR
                 fi
                 BUILD_CMD="./build-all-script.sh 3"
-                CLEAN_CMD="./build-all-script.sh 3c"
+                CLEAN_CMD="touch ./kernel/drivers/char/vpu/*"
                 
+                source build/envsetup.sh 
                 eval $CLEAN_CMD
                 
                 cov-build --dir $IDIR_NAME  --emit-complementary-info --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml $BUILD_CMD
@@ -121,13 +122,12 @@ while (( "$#" )); do
             if [ -d $IDIR_DIR ]; then
                 COV_ANALYZE_OPTIONS="--dir $IDIR_NAME --disable-default \
                 --strip-path $CODE_BASE_DIR \
-                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-210714.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml \
                 --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf \
                 @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"
-
+#               --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 cov-analyze $COV_ANALYZE_OPTIONS
             else
                 echo "the captured directory not exist"

@@ -47,3 +47,9 @@
 #nodef MODULE_DEVICE_TABLE(type, name)	  IGNORE_1
 #nodef init_waitqueue_head(wq_head)         1
 #nodef mutex_init(a)                        1
+#nodef atomic_inc(ptr)                      1
+#nodef atomic_andnot(v, ptr)	              1
+#nodef atomic_or(v, ptr)	                  1 
+#nodef spin_lock_init(ptr)                  1
+#nodef mutex_lock(m)                        1     
+#nodef mutex_unlock(m)	                    1

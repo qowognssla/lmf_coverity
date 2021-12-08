@@ -31,7 +31,6 @@
 #nodef my_assert
 ...
 **/
-
 #define IGNORE_1
 
 #nodef MODULE_DEVICE_TABLE(type, name)    IGNORE_1
@@ -40,8 +39,11 @@
 #nodef MODULE_DESCRIPTION(_str_)          IGNORE_1
 #nodef EXPORT_SYMBOL(x)                   IGNORE_1
 #nodef atomic_read(v)                       1
-#nodef list_first_entry(ptr, type, member)  1
+#nodef atomic_set(v, i)                     1
+#nodef list_first_entry(ptr, type, member)  0
 #nodef wait_event_interruptible_timeout(wq_head, condition, timeout) 1
-#nodef module_init(a)     IGNORE_1
-#nodef module_init(a)     IGNORE_1
-#nodef MODULE_DEVICE_TABLE(type, name)	 IGNORE_1
+#nodef module_init(a)                     IGNORE_1
+#nodef module_exit(a)                     IGNORE_1
+#nodef MODULE_DEVICE_TABLE(type, name)	  IGNORE_1
+#nodef init_waitqueue_head(wq_head)         1
+#nodef mutex_init(a)                        1

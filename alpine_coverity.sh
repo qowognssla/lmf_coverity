@@ -148,6 +148,11 @@ while (( "$#" )); do
             exit 1
             ;;
         -f|--filter)
+            if  [ $3 == "-s" ] || [ $3 == "--stream" ]; then
+                STREAM_ID=$4
+                echo "set stream to $STREAM_ID"
+            fi
+
             if [ $2 == "get" ]; then 
                 cov-manage-findings --dir $IDIR_NAME --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
                 chmod 777 my_findings_report_output.xlsx

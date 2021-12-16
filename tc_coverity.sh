@@ -92,8 +92,11 @@ while (( "$#" )); do
                 if [ -f $CODE_BASE_DIR/autolinux ]; then
                     CLEAN_CMD=${CLEAN_CMD/build /build \"}
                     CLEAN_CMD=${CLEAN_CMD/cleanall/cleanall\"}
+                    CLEAN_CMD=${CLEAN_CMD/compile/compile\"}
                 fi
+
                 eval $CLEAN_CMD
+                
                 
                 cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD
                 
@@ -154,6 +157,10 @@ while (( "$#" )); do
             exit 1
             ;;
         -f|--filter)
+            if  [ $3 == "-s" ] || [ $3 == "--stream" ]; then
+                STREAM_ID=$4
+                echo "set stream to $STREAM_ID"
+            fi
             if [ $2 == "get" ]; then 
                 cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
                 chmod 777 my_findings_report_output.xlsx

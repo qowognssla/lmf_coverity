@@ -32,10 +32,8 @@
 ...
 **/
 
-#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) G_STMT_START{		\
-    gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	\
-        (GObject *) (object), __VA_ARGS__);				\
-}G_STMT_END
+#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
+
 
 #nodef GST_TRACE(...)		GST_CAT_LEVEL_LOG (GST_CAT_DEFAULT, GST_LEVEL_TRACE,   NULL, __VA_ARGS__)
 

@@ -1,0 +1,29 @@
+{
+      "type" : "Coverity analysis configuration",
+      "format_version" : 12,
+      "language" : "C-like",
+      "directives" : [
+	       {
+		  "dc_checker_name" : "DC.CUSTOM_REALLOC",
+	       },
+	       {
+		  "method_set_for_dc_checker" : "DC.CUSTOM_REALLOC",
+		  "methods" : { "named" : "realloc" },
+	       },	       
+	       {
+		  "dc_checker_name" : "DC.CUSTOM_GETLOGIN",
+	       },
+	       {
+		  "method_set_for_dc_checker" : "DC.CUSTOM_GETLOGIN",
+		  "methods" : { "named" : "getlogin" },
+	       },
+	       {
+		  "dc_checker_name" : "DC.CUSTOM_PR_DEBUG",
+	       },
+	       {
+		  "method_set_for_dc_checker" : "DC.CUSTOM_PR_DEBUG",
+		  "methods" : { "named" : "pr_debug" },
+	       },
+		   
+      ]
+}

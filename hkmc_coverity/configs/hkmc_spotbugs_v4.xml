@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) 2018 Synopsys, Inc. All rights reserved worldwide. -->
+<FindBugsFilter>
+<Match>
+<Bug pattern="EI_EXPOSE_REP2" />
+</Match>
+<Match>
+<Bug pattern="EI_EXPOSE_REP" />
+</Match>
+<Match>
+<Bug pattern="EI_EXPOSE_STATIC_REP2" />
+</Match>
+<Match>
+<Bug pattern="EQ_COMPARING_CLASS_NAMES" />
+</Match>
+<Match>
+<Bug pattern="MS_SHOULD_BE_FINAL" />
+</Match>
+<Match>
+<Bug pattern="BOA_BADLY_OVERRIDDEN_ADAPTER" />
+</Match>
+<Match>
+<Bug pattern="EQ_GETCLASS_AND_CLASS_CONSTANT" />
+</Match>
+<Match>
+<Bug pattern="EQ_OVERRIDING_EQUALS_NOT_SYMMETRIC" />
+</Match>
+<Match>
+<Bug pattern="HE_SIGNATURE_DECLARES_HASHING_OF_UNHASHABLE_CLASS" />
+</Match>
+<Match>
+<Bug pattern="HE_USE_OF_UNHASHABLE_CLASS" />
+</Match>
+<Match>
+<Bug pattern="RU_INVOKE_RUN" />
+</Match>
+<Match>
+<Bug pattern="CN_IDIOM" />
+</Match>
+<Match>
+<Bug pattern="CN_IDIOM_NO_SUPER_CALL" />
+</Match>
+<Match>
+<Bug pattern="CN_IMPLEMENTS_CLONE_BUT_NOT_CLONEABLE" />
+</Match>
+<Match>
+<Bug pattern="OVERRIDING_METHODS_MUST_INVOKE_SUPER" />
+</Match>
+<Match>
+<Bug pattern="ESYNC_EMPTY_SYNC" />
+</Match>
+<Match>
+<Bug pattern="NP_SYNC_AND_NULL_CHECK_FIELD" />
+</Match>
+<Match>
+<Bug pattern="DL_SYNCHRONIZATION_ON_BOOLEAN" />
+</Match>
+<Match>
+<Bug pattern="DL_SYNCHRONIZATION_ON_BOXED_PRIMITIVE" />
+</Match>
+<Match>
+<Bug pattern="DL_SYNCHRONIZATION_ON_SHARED_CONSTANT" />
+</Match>
+<Match>
+<Bug pattern="JLM_JSR166_LOCK_MONITORENTER" />
+</Match>
+<Match>
+<Bug pattern="SWL_SLEEP_WITH_LOCK_HELD" />
+</Match>
+<Match>
+<Bug pattern="WA_AWAIT_NOT_IN_LOOP" />
+</Match>
+<Match>
+<Bug pattern="WA_NOT_IN_LOOP" />
+</Match>
+<Match>
+<Bug pattern="SC_START_IN_CTOR" />
+</Match>
+<Match>
+<Bug pattern="DC_PARTIALLY_CONSTRUCTED" />
+</Match>
+<Match>
+<Bug pattern="J2EE_STORE_OF_NON_SERIALIZABLE_OBJECT_INTO_SESSION" />
+</Match>
+<Match>
+<Bug pattern="MSF_MUTABLE_SERVLET_FIELD" />
+</Match>
+<Match>
+<Bug pattern="MTIA_SUSPECT_STRUTS_INSTANCE_FIELD" />
+</Match>
+<Match>
+<Bug pattern="MTIA_SUSPECT_SERVLET_INSTANCE_FIELD" />
+</Match>
+</FindBugsFilter>

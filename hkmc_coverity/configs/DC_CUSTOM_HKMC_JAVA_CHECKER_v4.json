@@ -1,0 +1,22 @@
+{
+   "type" : "Coverity analysis configuration",
+   "format_version" : 12,
+   "language" : "Java",
+   "directives" : [
+      {
+         "dc_checker_name" : "DC.CUSTOM_SYSTEM_EXIT",
+      },
+      {
+            "method_set_for_dc_checker" : "DC.CUSTOM_SYSTEM_EXIT",
+            "methods" : { "named" : "java.lang.System.exit(int)void" },
+      },
+
+      {
+         "dc_checker_name" : "DC.CUSTOM_RUN",
+      },
+      {
+            "method_set_for_dc_checker" : "DC.CUSTOM_RUN",
+            "methods" : { "named" : "java.lang.Thread.run(void)void" },
+      },
+   ]
+}

@@ -1,0 +1,11 @@
+--tu-pattern=file('.*\.cpp$')
+--disable-default
+--enable=UNCAUGHT_EXCEPT
+--enable=RESOURCE_LEAK
+--enable=COM.BSTR.ALLOC
+--enable=CTOR_DTOR_LEAK
+--enable=NO_EFFECT
+--enable=RETURN_LOCAL
+--enable-parse-warnings
+--parse-warnings-config=/home/coverity/cov-analysis-linux64/hkmc-config/hkmc_cpp_parse_warnings_v4.config
+--coding-standard-config=/home/coverity/cov-analysis-linux64/hkmc-config/hkmc_certcpp_v4.config

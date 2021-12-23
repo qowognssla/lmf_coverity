@@ -25,6 +25,7 @@ else
 fi
 
 echo Base Code Directory : $CODE_BASE_DIR
+echo HKMC_COVERITY_DIR : $HKMC_COVERITY_DIR
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
@@ -83,18 +84,22 @@ while (( "$#" )); do
                 
                 cd $CODE_BASE_DIR
 
-                soruce build/envsetup.sh
+                source build/envsetup.sh
                 lunch 15
 
                 cd $CODE_BASE_DIR/kernel
 
                 make tcc803x_android_avn_defconfig
                 
-                BUILD_CMD="make"
-                CLEAN_CMD="find ./drivers/char/vpu -type f -exec touch {} \;"
+                BUILD_CMD="make drivers/char/"
                 
-                eval $CLEAN_CMD
-                
+                #touch ./drivers/char/vpu/vpu_new/*
+                find ./drivers/char -type f -name "tcc_jpeg*.o" -exec rm -rf {} \;
+                find ./drivers/char -type f -name "tcc_jpeg*" -exec touch {} \;
+                find ./drivers/char/vpu -type f -name "*.o" -exec rm -rf {} \;
+                find ./drivers/char/vpu -type f -name "*.ko" -exec rm -rf {} \;
+                touch drivers/char/vpu/vpu_new/*
+
                 cov-build --dir $IDIR_DIR  --emit-complementary-info --config $HKMC_COVERITY_DIR/hkmc_config/hkmc_coverity.xml $BUILD_CMD
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
@@ -126,13 +131,13 @@ while (( "$#" )); do
             if [ -d $IDIR_DIR ]; then
                 COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
-                @@$CONFIGS_DIR/HKMC_C_Rule_v4.txt \
                 --coding-standard-config $CONFIGS_DIR/hkmc_certc_v4.config \
                 --coding-standard-config $CONFIGS_DIR/hkmc_cert_c_recommendation_v4.config \
                 --coding-standard-config $CONFIGS_DIR/hkmc_misrac_v4.config \
                 --parse-warnings-config $CONFIGS_DIR/hkmc_c_parse_warnings_v4.config \
                 --config $HKMC_COVERITY_DIR/hkmc_config/hkmc_coverity.xml \
-                --dc-config $CONFIGS_DIR/DC_CUSTOM_HKMC_C_CHECKER_v4.json"
+                --dc-config $CONFIGS_DIR/DC_CUSTOM_HKMC_C_CHECKER_v4.json \
+                @@$CONFIGS_DIR/HKMC_C_Rule_v4.txt"
 
                 cov-analyze $COV_ANALYZE_OPTIONS
             else

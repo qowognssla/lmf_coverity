@@ -178,7 +178,7 @@ while (( "$#" )); do
             ;;
          -h|--help)
              echo "[option] config -> setup -> analysis -> commit"
-             echo " -c : config (select : cdk-audio, libomxil-telechips, gst-plugins-telechips)"
+             echo " -c : config (e.g select : cdk-audio, libomxil-telechips, gst-plugins-telechips)"
              echo " -s : setup (cleanall, build)"
              echo " -a : analysis (config dir: $CONFIGS_DIR)"
              echo " -e : commit (parsing from converity.conf, if it has addtional stream_id then will be applied"
@@ -186,6 +186,7 @@ while (( "$#" )); do
              echo "      get   : get execl file from stream server. please check telechips wiki https://wiki.telechips.com:8443/pages/viewpage.action?pageId=208798206"
              echo "      check : check the filter is correct"
              echo "      set  : update filter excel (if want to result in web server, please commit after done set"
+             echo "            (optional) -s stream"
              echo " -h : help"
              exit 1
              ;;

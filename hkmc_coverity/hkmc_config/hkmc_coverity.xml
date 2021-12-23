@@ -5,6 +5,11 @@
     <cit_version>1</cit_version>
     <config>
       <include>$CONFIGDIR$/template-gcc-config-0/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-0/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-1/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-2/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-1/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-2/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-ld-config-0/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-ar-config-0/coverity_config.xml</include>
     </config>

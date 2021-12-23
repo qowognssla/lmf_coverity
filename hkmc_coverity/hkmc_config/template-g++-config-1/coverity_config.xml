@@ -8,28 +8,23 @@
       <build>
         <compiler>
           <template_compiler>true</template_compiler>
-          <comp_name>arm-eabi-gcc</comp_name>
-          <comp_translator>gcc</comp_translator>
-          <comp_lang>C</comp_lang>
+          <comp_name>arm-eabi-g++-3</comp_name>
+          <comp_translator>g++</comp_translator>
+          <comp_lang>C++</comp_lang>
           <comp_generic>gnu</comp_generic>
         </compiler>
         <options>
-          <id>gcc-arm-eabi-gcc-.*</id>
+          <id>g++-arm-eabi-g++-3-.*</id>
           <opt_preinclude_file>$CONFIGDIR$/../user_nodefs.h</opt_preinclude_file>
           <begin_command_line_config></begin_command_line_config>
         </options>
         <options>
-          <id>g++-arm-eabi-gcc-.*</id>
-          <opt_preinclude_file>$CONFIGDIR$/../user_nodefs.h</opt_preinclude_file>
-          <begin_command_line_config></begin_command_line_config>
-        </options>
-        <options>
-          <id>g++cc-arm-eabi-gcc-.*</id>
+          <id>g++cc-arm-eabi-g++-3-.*</id>
           <opt_preinclude_file>$CONFIGDIR$/../user_nodefs.h</opt_preinclude_file>
           <begin_command_line_config></begin_command_line_config>
         </options>
       </build>
     </config>
-    <md5>1660c32308b7276d8b3a2b842051ecee</md5>
+    <md5>9ca2f3af3c2cbd92a69bd8f7175801a1</md5>
 </coverity>
 

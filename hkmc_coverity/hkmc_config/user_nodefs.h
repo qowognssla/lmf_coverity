@@ -53,4 +53,5 @@
 #nodef spin_lock_init(ptr)                  1
 #nodef mutex_lock(m)                        1     
 #nodef mutex_unlock(m)	                    1
-#nodef spin_lock_irqsave(lock, flags)       1	
+#nodef spin_lock_irqsave(lock, flags)       1
+#nodef readl(m)                             1

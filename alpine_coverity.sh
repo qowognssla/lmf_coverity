@@ -122,8 +122,8 @@ while (( "$#" )); do
             if [ -d $IDIR_DIR ]; then
                 COV_ANALYZE_OPTIONS="--dir $IDIR_NAME --disable-default \
                 --strip-path $CODE_BASE_DIR \
-		--coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
-		--coding-standard-config $CONFIGS_DIR/cert-c-all-deviations-7rules-for-alpine.config \
+		        --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
+		        --coding-standard-config $CONFIGS_DIR/cert-c-all-deviations-7rules-for-alpine_with_tc.config \
                 --config $ALPINE_COVERITY_DIR/alpine_config/custom_coverity.xml \
                 --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf \
                 @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"

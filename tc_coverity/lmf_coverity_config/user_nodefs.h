@@ -31,8 +31,22 @@
 #nodef my_assert
 ...
 **/
+#include <glib/gprintf.h>
 
-#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
+#define tcc_printf (void)g_printf
+#define CONV_PTR(PTR) ((void *)PTR)
+
+//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
+//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) G_STMT_START{ \
+//      tcc_printf("%d ", cat); \
+//      tcc_printf("%d ", level); \
+//      tcc_printf("%d ", (void *)object); \
+//      tcc_printf(...); \
+//}G_STMT_END 
+
+#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) \
+  (void)g_printf("%p", object); \
+  (void)g_printf(__VA_ARGS__); 
 
 
 #nodef GST_TRACE(...)		GST_CAT_LEVEL_LOG (GST_CAT_DEFAULT, GST_LEVEL_TRACE,   NULL, __VA_ARGS__)

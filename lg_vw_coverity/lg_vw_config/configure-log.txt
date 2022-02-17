@@ -1,0 +1,3 @@
+Native Compiler and extra args: ./ 
+Working directory: /home/B210384/source/100.common/lmf_coverity/lg_vw_coverity/lg_vw_config
+Comptype: gcc

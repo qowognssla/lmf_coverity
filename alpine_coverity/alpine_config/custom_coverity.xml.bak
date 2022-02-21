@@ -12,13 +12,6 @@
       <include>$CONFIGDIR$/template-g++-config-2/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-ld-config-0/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-ar-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-javac-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-java-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-apt-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-javaw-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-jsp-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-android-config-0/coverity_config.xml</include>
-      <include>$CONFIGDIR$/template-capture-config-files-config-0/coverity_config.xml</include>
     </config>
 </coverity>
 

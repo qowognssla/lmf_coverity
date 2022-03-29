@@ -74,6 +74,11 @@ while (( "$#" )); do
                 echo setting up tc_coverity directory
                 ln -s $HERE/tc_coverity $CODE_BASE_DIR/tc_coverity
 
+                if [ ${array[$CONFIG_INDEX]} = linux-telechips-vpu.conf ]; then
+                    echo Copy script
+                    cp -r $HERE/make_lmf_coverity.sh $CODE_BASE_DIR/
+                fi
+
             else   
                 echo "${RED}Error: there are no conf file in tc_coverity directory${NC}"
             fi
@@ -98,7 +103,7 @@ while (( "$#" )); do
                 eval $CLEAN_CMD
                 
                 
-                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD
+                cov-build --dir $IDIR_DIR  --emit-complementary-info $BUILD_CMD
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
                     rm -rf $PLUGIN_IDIR_PATH
@@ -187,5 +192,8 @@ while (( "$#" )); do
              echo " -h : help"
              exit 1
              ;;
+         *)
+            echo "Not support command"
+            ;;
     esac
 done

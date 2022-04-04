@@ -26,15 +26,11 @@
  * overloading, though, it is perfectly fine to have more than one
  * prototype for a single function call.
  */
-
-/** Enter company-specific nodefs here:
-#nodef my_assert
-...
-**/
 #include <glib/gprintf.h>
 
 #define tcc_printf (void)g_printf
 #define CONV_PTR(PTR) ((void *)PTR)
+#define IGNORE_1
 
 //#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
 //#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) G_STMT_START{ \
@@ -44,14 +40,27 @@
 //      tcc_printf(...); \
 //}G_STMT_END 
 
-#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) \
-  (void)g_printf("%p", object); \
-  (void)g_printf(__VA_ARGS__); 
+//
 
 
-#nodef GST_TRACE(...)		GST_CAT_LEVEL_LOG (GST_CAT_DEFAULT, GST_LEVEL_TRACE,   NULL, __VA_ARGS__)
 
-void CATEGORY_INIT(GObject cat, char *name, int color, char * description);
-
-#nodef GST_DEBUG_CATEGORY_INIT(cat,name,color,description) CATEGORY_INIT(cat, name, color, description);
-#nodef G_UNLIKELY(expr) (expr)
+#nodef MODULE_DEVICE_TABLE(type, name)    IGNORE_1
+#nodef MODULE_AUTHOR(x)
+#nodef MODULE_LICENSE(_licence_)          IGNORE_1
+#nodef MODULE_DESCRIPTION(_str_)          IGNORE_1
+#nodef EXPORT_SYMBOL(x)                   IGNORE_1
+#nodef atomic_read(v)                       1
+#nodef atomic_set(v, i)                     1
+#nodef list_first_entry(ptr, type, member)  0
+#nodef wait_event_interruptible_timeout(wq_head, condition, timeout) 1
+#nodef module_init(a)                     IGNORE_1
+#nodef module_exit(a)                     IGNORE_1
+#nodef MODULE_DEVICE_TABLE(type, name)	  IGNORE_1
+#nodef init_waitqueue_head(wq_head)         1
+#nodef mutex_init(a)                        1
+#nodef atomic_inc(ptr)                      1
+#nodef atomic_andnot(v, ptr)	              1
+#nodef atomic_or(v, ptr)	                  1 
+#nodef spin_lock_init(ptr)                  1
+#nodef mutex_lock(m)                        1     
+#nodef mutex_unlock(m)	                    1

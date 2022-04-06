@@ -8,9 +8,9 @@ COVERITY_PLUGIN_DIR=$HOME/.synopsys/desktop/controller/logs
 CONFIGS_DIR=$TC_COVERITY_DIR/configs/latest-release
 COVERITY_ID_PASS="telechips07"
 
-if [ -d "/home/coverity" ]; then
-    CONFIGS_DIR=/home/coverity/cov-analysis-linux64/telechips-config/latest-release
-fi
+#if [ -d "/home/coverity" ]; then
+#    CONFIGS_DIR=/home/coverity/cov-analysis-linux64/telechips-config/latest-release
+#fi
 
 echo CONFIGS_DIR : $CONFIGS_DIR
 
@@ -102,8 +102,8 @@ while (( "$#" )); do
 
                 eval $CLEAN_CMD
                 
-                
-                cov-build --dir $IDIR_DIR  --emit-complementary-info $BUILD_CMD
+
+                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
                     rm -rf $PLUGIN_IDIR_PATH
@@ -139,9 +139,9 @@ while (( "$#" )); do
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"
-                if [ ! -d "/home/coverity" ]; then
+#                if [ ! -d "/home/coverity" ]; then
                     COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf"
-                fi
+#                fi
                 cov-analyze $COV_ANALYZE_OPTIONS
             else
                 echo "the captured directory not exist"

@@ -26,11 +26,10 @@
  * overloading, though, it is perfectly fine to have more than one
  * prototype for a single function call.
  */
-#include <glib/gprintf.h>
+//#include <glib/gprintf.h>
 
-#define tcc_printf (void)g_printf
-#define CONV_PTR(PTR) ((void *)PTR)
-#define IGNORE_1
+//#define tcc_printf (void)g_printf
+//#define CONV_PTR(PTR) ((void *)PTR)
 
 //#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
 //#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) G_STMT_START{ \
@@ -42,7 +41,7 @@
 
 //
 
-
+#define IGNORE_1
 
 #nodef MODULE_DEVICE_TABLE(type, name)    IGNORE_1
 #nodef MODULE_AUTHOR(x)

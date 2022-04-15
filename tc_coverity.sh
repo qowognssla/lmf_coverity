@@ -34,16 +34,18 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 GREEN='\033[0;33m'
 
-if [ -f $CODE_BASE_DIR/coverity.conf ]; then
-    STREAM_ID=`cat $CODE_BASE_DIR/coverity.conf | python3 -c "import sys, json; print(''.join(json.load(sys.stdin)['settings']['stream']))"`
-    echo Stream Information : $STREAM_ID
+if [ -f $TC_COVERITY_DIR/tmp.conf ]; then
+    soruce $TC_COVERITY_DIR/tmp.conf
+    echo BUILD_CMD = $BUILD_CMD
+    echo CLEAN_CMD = $CLEAN_CMD
+    echo STREAM_ID = $STREAM_ID
 fi
 
 # get options:
 while (( "$#" )); do
     case "$1" in
         -c|--config)
-            mapfile array < <(find $TC_COVERITY_DIR -maxdepth 1 -type f -name "*.conf" -exec basename {} \;)
+            mapfile array < <(find $TC_COVERITY_DIR -maxdepth 1 -type f -name "*.config" -exec basename {} \;)
             LIST_LENGTH=${#array[@]}
             if [ $LIST_LENGTH -ne 0 ]; then
 
@@ -64,7 +66,9 @@ while (( "$#" )); do
                 if [ $CONFIG_INDEX -eq $INDEX ]; then exit 1; fi
 
                 echo -e "Selected config file is ${GREEN}"${array[$CONFIG_INDEX]}"${NC}"
-                cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/coverity.conf
+                #cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/coverity.conf
+                cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $TC_COVERITY_DIR/tmp.conf
+                cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
 
                 if [ -d $CODE_BASE_DIR/tc_coverity ]; then
                     echo "already has tc_coverity dir, re-set up"
@@ -80,7 +84,7 @@ while (( "$#" )); do
                 fi
 
             else   
-                echo "${RED}Error: there are no conf file in tc_coverity directory${NC}"
+                echo "${RED}[Error] there are no conf file in tc_coverity directory${NC}"
             fi
             exit 1
             ;;
@@ -100,10 +104,10 @@ while (( "$#" )); do
                     CLEAN_CMD=${CLEAN_CMD/compile/compile\"}
                 fi
 
-                eval $CLEAN_CMD
+                #eval $CLEAN_CMD
                 
 
-                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD
+                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml ./autolinux -c build "libomxil-telechips -f -c compile"
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
                     rm -rf $PLUGIN_IDIR_PATH
@@ -194,6 +198,7 @@ while (( "$#" )); do
              ;;
          *)
             echo "Not support command"
+            exit 0
             ;;
     esac
 done

@@ -1,16 +1,12 @@
 #!/bin/bash
 
-CODE_BASE_DIR=`pwd`
+export CODE_BASE_DIR=`pwd`
 HERE=$(dirname $(realpath $0))
 IDIR_DIR=$CODE_BASE_DIR/idir
 TC_COVERITY_DIR=$HERE/tc_coverity
 COVERITY_PLUGIN_DIR=$HOME/.synopsys/desktop/controller/logs
 CONFIGS_DIR=$TC_COVERITY_DIR/configs/latest-release
 COVERITY_ID_PASS="telechips07"
-
-#if [ -d "/home/coverity" ]; then
-#    CONFIGS_DIR=/home/coverity/cov-analysis-linux64/telechips-config/latest-release
-#fi
 
 echo CONFIGS_DIR : $CONFIGS_DIR
 
@@ -30,15 +26,14 @@ fi
 
 echo Base Code Directory : $CODE_BASE_DIR
 
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-GREEN='\033[0;33m'
+RED='\e[0;31m'
+NC='\e[0m' # No Color
+GREEN='\e[0;33m'
 
 if [ -f $TC_COVERITY_DIR/tmp.conf ]; then
-    soruce $TC_COVERITY_DIR/tmp.conf
-    echo BUILD_CMD = $BUILD_CMD
-    echo CLEAN_CMD = $CLEAN_CMD
-    echo STREAM_ID = $STREAM_ID
+    source $TC_COVERITY_DIR/tmp.conf
+    echo BUILD_CMD : $BUILD_CMD
+    echo STREAM_ID : $STREAM_ID
 fi
 
 # get options:
@@ -66,7 +61,7 @@ while (( "$#" )); do
                 if [ $CONFIG_INDEX -eq $INDEX ]; then exit 1; fi
 
                 echo -e "Selected config file is ${GREEN}"${array[$CONFIG_INDEX]}"${NC}"
-                #cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/coverity.conf
+
                 cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $TC_COVERITY_DIR/tmp.conf
                 cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
 
@@ -93,21 +88,12 @@ while (( "$#" )); do
                 if [ -d $IDIR_DIR ]; then
                     rm -rf $IDIR_DIR
                 fi
-                BUILD_CMD=`cat $CODE_BASE_DIR/coverity.conf | python3 -c "import sys, json; print(' '.join(json.load(sys.stdin)['settings']['cov_run_desktop']['build_cmd']))"`
-                CLEAN_CMD=`cat $CODE_BASE_DIR/coverity.conf | python3 -c "import sys, json; print(' '.join(json.load(sys.stdin)['settings']['cov_run_desktop']['clean_cmd']))"`
+
+                $HERE/clean_lmf.sh $MODULE_NAME
                 
-                echo $BUILD_CMD
-
-                if [ -f $CODE_BASE_DIR/autolinux ]; then
-                    CLEAN_CMD=${CLEAN_CMD/build /build \"}
-                    CLEAN_CMD=${CLEAN_CMD/cleanall/cleanall\"}
-                    CLEAN_CMD=${CLEAN_CMD/compile/compile\"}
-                fi
-
-                #eval $CLEAN_CMD
+                BUILD="cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD"
                 
-
-                cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml ./autolinux -c build "libomxil-telechips -f -c compile"
+                eval $BUILD
                 
                 if [ -d $PLUGIN_IDIR_PATH ]; then
                     rm -rf $PLUGIN_IDIR_PATH
@@ -143,9 +129,7 @@ while (( "$#" )); do
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"
-#                if [ ! -d "/home/coverity" ]; then
                     COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf"
-#                fi
                 cov-analyze $COV_ANALYZE_OPTIONS
             else
                 echo "the captured directory not exist"
@@ -157,7 +141,6 @@ while (( "$#" )); do
                 if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
                     cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $2
                 else
-                    #echo "Error: Argument for $1 is missing" >&2
                     cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $STREAM_ID
                 fi
             else
@@ -196,6 +179,10 @@ while (( "$#" )); do
              echo " -h : help"
              exit 1
              ;;
+         -w)
+            $HERE/clean_lmf.sh $MODULE_NAME
+            exit 1
+            ;;
          *)
             echo "Not support command"
             exit 0

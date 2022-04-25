@@ -73,7 +73,7 @@ while (( "$#" )); do
                 echo setting up tc_coverity directory
                 ln -s $HERE/tc_coverity $CODE_BASE_DIR/tc_coverity
 
-                if [ ${array[$CONFIG_INDEX]} = linux-telechips-vpu.conf ]; then
+                if [ ${array[$CONFIG_INDEX]} = kernel_vpu_k54.config ]; then
                     echo Copy script
                     cp -r $HERE/make_lmf_coverity.sh $CODE_BASE_DIR/
                 fi

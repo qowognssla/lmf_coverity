@@ -26,40 +26,72 @@
  * overloading, though, it is perfectly fine to have more than one
  * prototype for a single function call.
  */
-//#include <glib/gprintf.h>
 
-//#define tcc_printf (void)g_printf
-//#define CONV_PTR(PTR) ((void *)PTR)
+#if 0
+#include <glib/gprintf.h>
 
-//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) gst_debug_log ((cat), (level), __FILE__, GST_FUNCTION, __LINE__,	(GObject *) (object), __VA_ARGS__);
-//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...) G_STMT_START{ \
-//      tcc_printf("%d ", cat); \
-//      tcc_printf("%d ", level); \
-//      tcc_printf("%d ", (void *)object); \
-//      tcc_printf(...); \
-//}G_STMT_END 
+#define tcc_printf (void)g_printf
+#define CONV_PTR(PTR) ((void *)PTR)
 
-//
+#define IGNORE_1
+
+#nodef GST_CAT_LEVEL_LOG(cat,level,object,...)      IGNORE_1
+#nodef G_OBJECT_CLASS(a)                            IGNORE_1
+
+#else 
 
 #define IGNORE_1
 
 #nodef MODULE_DEVICE_TABLE(type, name)    IGNORE_1
-#nodef MODULE_AUTHOR(x)
+#nodef MODULE_AUTHOR(_author)             IGNORE_1
 #nodef MODULE_LICENSE(_licence_)          IGNORE_1
 #nodef MODULE_DESCRIPTION(_str_)          IGNORE_1
+
 #nodef EXPORT_SYMBOL(x)                   IGNORE_1
-#nodef atomic_read(v)                       1
-#nodef atomic_set(v, i)                     1
-#nodef list_first_entry(ptr, type, member)  0
-#nodef wait_event_interruptible_timeout(wq_head, condition, timeout) 1
+
 #nodef module_init(a)                     IGNORE_1
 #nodef module_exit(a)                     IGNORE_1
-#nodef MODULE_DEVICE_TABLE(type, name)	  IGNORE_1
-#nodef init_waitqueue_head(wq_head)         1
-#nodef mutex_init(a)                        1
+
+#nodef mutex_init(m)                      IGNORE_1
+#nodef mutex_lock(m)                        1
+#nodef mutex_unlock(m)                      1
+
+#nodef atomic_read(v)                       1
+#nodef atomic_set(v, i)                     1
 #nodef atomic_inc(ptr)                      1
-#nodef atomic_andnot(v, ptr)	              1
-#nodef atomic_or(v, ptr)	                  1 
+#nodef atomic_andnot(v, ptr)                1
+#nodef atomic_or(v, ptr)                    1
+
 #nodef spin_lock_init(ptr)                  1
-#nodef mutex_lock(m)                        1     
-#nodef mutex_unlock(m)	                    1
+
+#nodef readl							1
+
+#nodef kernel_read(s,d,f,p)					1
+//#nodef vfs_read(s,d,f,p)					1
+
+#nodef list_first_entry(ptr, type, member)  0
+
+//////////////////////////////////////////////////////////////////////////
+//V 1.7.2
+#nodef udelay(a)                            IGNORE_1
+
+//////////////////////////////////////////////////////////////////////////
+//V 1.7.3
+#nodef VPU_IS_ERR(a)                           ((bool)false)
+
+//////////////////////////////////////////////////////////////////////////
+//V1. 8
+//
+//#nodef kthread_run(threadfn,data,namefmt,__VA_ARGS__...) NULL
+//#nodef init_waitqueue_head(wq_head)		1
+
+//////////////////////////////////////////////////////////////////////////
+//V2.0
+//#nodef wait_event_interruptible_timeout(wq_head, condition, timeout) 1
+//#nodef compat_ptr(v)			1v
+
+#nodef kthread_run(threadfn,data,namefmt,__VA_ARGS__...) NULL
+#nodef init_waitqueue_head(a)               IGNORE_1
+#nodef container_of(a,b,c)                  (((b) *)(a))
+
+#endif

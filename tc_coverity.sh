@@ -30,8 +30,8 @@ RED='\e[0;31m'
 NC='\e[0m' # No Color
 GREEN='\e[0;33m'
 
-if [ -f $TC_COVERITY_DIR/tmp.conf ]; then
-    source $TC_COVERITY_DIR/tmp.conf
+if [ -f $CODE_BASE_DIR/tmp.conf ]; then
+    source $CODE_BASE_DIR/tmp.conf
     echo BUILD_CMD : $BUILD_CMD
     echo STREAM_ID : $STREAM_ID
 fi
@@ -62,7 +62,7 @@ while (( "$#" )); do
 
                 echo -e "Selected config file is ${GREEN}"${array[$CONFIG_INDEX]}"${NC}"
 
-                cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $TC_COVERITY_DIR/tmp.conf
+                cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/tmp.conf
                 cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
 
                 if [ -d $CODE_BASE_DIR/tc_coverity ]; then

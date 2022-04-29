@@ -36,7 +36,7 @@ elif [ $MODULE == "gstreamer1.0-plugins-telechips" ]; then
     cd $MODULE_PATH/git && make clean
 elif [ $MODULE == "vpu_kernel_k54" ]; then
     echo clean "vpu_kernel_k54"
-    ./make_lmf_coverity.sh clean
+    ./make_vpu_k54.sh clean
 elif [ $MODULE == "dvrs_media_framework" ]; then
     echo clean "dvrs_media_framework"
     make clean

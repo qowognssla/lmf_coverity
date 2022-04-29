@@ -1,6 +1,5 @@
 #!/bin/bash
-
-export GCC_TOOLCHAIN_DIR=/home/hoonbae/source/100.common/gcc-arm-9.2-2019.12-x86_64-aarch64-none-linux-gnu/bin
+source tmp.conf
 
 export VPU_DIR=./drivers/char/vpu
 export DRIVERS_DIR=./drivers/char/

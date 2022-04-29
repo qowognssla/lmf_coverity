@@ -77,7 +77,7 @@ while (( "$#" )); do
 
                 if [ ${array[$CONFIG_INDEX]} = kernel_vpu_k54.config ]; then
                     echo Copy script
-                    cp -r $HERE/make_lmf_coverity.sh $CODE_BASE_DIR/
+                    cp -r $HERE/make_vpu_k54.sh $CODE_BASE_DIR/
                 fi
 
             else   

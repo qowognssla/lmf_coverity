@@ -40,4 +40,7 @@ elif [ $MODULE == "vpu_kernel_k54" ]; then
 elif [ $MODULE == "dvrs_media_framework" ]; then
     echo clean "dvrs_media_framework"
     make clean
+elif [ $MODULE == "t-media-framework" ]; then
+    echo clean "t-media-framework"
+    cd $MODULE_PATH/build && make clean
 fi

@@ -18,6 +18,12 @@
       <include>$CONFIGDIR$/template-g++-config-4/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-g++-config-5/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-ar-config-0/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-6/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-6/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-7/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-8/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-7/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-8/coverity_config.xml</include>
     </config>
 </coverity>
 

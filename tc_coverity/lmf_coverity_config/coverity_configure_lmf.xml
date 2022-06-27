@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE coverity SYSTEM "coverity_config.dtd">
 <coverity>
-<!-- Version 2021.9.0 -->
+<!-- Version 2022.3.0 -->
     <cit_version>1</cit_version>
     <config>
       <include>$CONFIGDIR$/template-gcc-config-0/coverity_config.xml</include>
@@ -24,6 +24,12 @@
       <include>$CONFIGDIR$/template-gcc-config-8/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-g++-config-7/coverity_config.xml</include>
       <include>$CONFIGDIR$/template-g++-config-8/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-9/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-9/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-10/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-gcc-config-11/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-10/coverity_config.xml</include>
+      <include>$CONFIGDIR$/template-g++-config-11/coverity_config.xml</include>
     </config>
 </coverity>
 

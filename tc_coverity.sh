@@ -144,9 +144,9 @@ while (( "$#" )); do
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220110.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
-                @@$CONFIGS_DIR/runtime_rules_telechips_211119.txt"
+                @@$CONFIGS_DIR/runtime_rules_telechips_220505.txt"
                 
-                COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_211119.conf"
+                COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_220505.conf"
                 
                 cov-analyze $COV_ANALYZE_OPTIONS
             else

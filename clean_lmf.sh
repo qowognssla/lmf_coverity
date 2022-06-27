@@ -42,5 +42,5 @@ elif [ $MODULE == "dvrs_media_framework" ]; then
     make clean
 elif [ $MODULE == "t-media-framework" ]; then
     echo clean "t-media-framework"
-    cd $MODULE_PATH/build && make clean
+    cd $MODULE_PATH/git && make distclean
 fi

@@ -27,16 +27,16 @@
  * prototype for a single function call.
  */
 
-#if 0
-#include <glib/gprintf.h>
+#if 1
+//#include <glib/gprintf.h>
 
-#define tcc_printf (void)g_printf
-#define CONV_PTR(PTR) ((void *)PTR)
+//#define tcc_printf (void)g_printf
+//#define CONV_PTR(PTR) ((void *)PTR)
 
-#define IGNORE_1
+//#define IGNORE_1
 
-#nodef GST_CAT_LEVEL_LOG(cat,level,object,...)      IGNORE_1
-#nodef G_OBJECT_CLASS(a)                            IGNORE_1
+//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...)      IGNORE_1
+//#nodef G_OBJECT_CLASS(a)                            IGNORE_1
 
 #else 
 

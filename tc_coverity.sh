@@ -141,12 +141,14 @@ while (( "$#" )); do
 #                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
-                --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220728.config \
+                --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
                 --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"
                 
                 COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_220505.conf"
+                
+                COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --dc-config $CONFIGS_DIR/DC_CUSTOM_TELECHIPS_220708.json"
                 
                 cov-analyze $COV_ANALYZE_OPTIONS
             else

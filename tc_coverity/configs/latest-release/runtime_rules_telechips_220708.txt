@@ -91,7 +91,6 @@
 --enable=WRITE_CONST_FIELD
 --enable=Y2K38_SAFETY
 --enable-parse-warnings
---dc-config=/home/coverity/cov-analysis-linux64/telechips-config/latest-release/DC_CUSTOM_TELECHIPS_220708.json
 --enable=DC.CUSTOM_REALLOC
 --enable=DC.CUSTOM_GETLOGIN
---parse-warnings-config=/home/coverity/cov-analysis-linux64/telechips-config/latest-release/parse_warnings_telechips_220505.conf
+--enable-parse-warnings

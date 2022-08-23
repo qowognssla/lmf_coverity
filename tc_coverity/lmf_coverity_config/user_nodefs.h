@@ -28,16 +28,21 @@
  */
 
 #if 1
-//#include <glib/gprintf.h>
+#include <glib/gprintf.h>
 
-//#define tcc_printf (void)g_printf
-//#define CONV_PTR(PTR) ((void *)PTR)
+#define tcc_printf (void)g_printf
+#define CONV_PTR(PTR) ((void *)PTR)
 
-//#define IGNORE_1
+#define IGNORE_1
+#nodef g_printf
 
-//#nodef GST_CAT_LEVEL_LOG(cat,level,object,...)      IGNORE_1
-//#nodef G_OBJECT_CLASS(a)                            IGNORE_1
+#nodef GST_CAT_LEVEL_LOG(cat,level,object,...)      IGNORE_1
+#nodef GST_INFO_OBJECT(object,...)                  IGNORE_1
 
+//#nodef GST_DEBUG_CATEGORY_EXTERN(var)               IGNORE_1
+#nodef G_DEFINE_TYPE(TN, t_n, T_P)			            IGNORE_1
+#nodef G_OBJECT_WARN_INVALID_PROPERTY_ID(a,b,c)     IGNORE_1
+#nodef GST_ELEMENT_ERROR                            IGNORE_1
 #else 
 
 #define IGNORE_1

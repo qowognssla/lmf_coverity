@@ -27,7 +27,7 @@
  * prototype for a single function call.
  */
 
-#if 1
+#if 0
 #include <glib/gprintf.h>
 
 #define tcc_printf (void)g_printf
@@ -43,10 +43,15 @@
 #nodef G_DEFINE_TYPE(TN, t_n, T_P)			            IGNORE_1
 #nodef G_OBJECT_WARN_INVALID_PROPERTY_ID(a,b,c)     IGNORE_1
 #nodef GST_ELEMENT_ERROR                            IGNORE_1
-#else 
+#nodef GST_BUFFER_FLAG_UNSET(a, b)                  IGNORE_1 
+#nodef GST_BUFFER_PTS (p_buffer)                    p_buffer 
+#nodef GST_BUFFER_DURATION (p_buffer)               p_buffer 
+#nodef GST_BUFFER_OFFSET (p_buffer)                 p_buffer 
+#nodef GST_BUFFER_OFFSET_END (p_buffer)             p_buffer 
+#endif
 
+#if 0
 #define IGNORE_1
-
 #nodef MODULE_DEVICE_TABLE(type, name)    IGNORE_1
 #nodef MODULE_AUTHOR(_author)             IGNORE_1
 #nodef MODULE_LICENSE(_licence_)          IGNORE_1

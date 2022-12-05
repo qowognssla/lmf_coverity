@@ -5,8 +5,10 @@ export CODE_BASE_DIR=`pwd`
 HERE=$(dirname $(realpath $0))
 IDIR_DIR=$CODE_BASE_DIR/idir
 TC_COVERITY_DIR=$HERE/tc_coverity
+#TC_COVERITY_DIR="home/coverity/cov-analysis-linux64/telechips-config"
 COVERITY_PLUGIN_DIR=$HOME/.synopsys/desktop/controller/logs
-CONFIGS_DIR=$TC_COVERITY_DIR/configs/latest-release
+#CONFIGS_DIR=$TC_COVERITY_DIR/configs/latest-release
+CONFIGS_DIR=/home/coverity/cov-analysis-linux64/telechips-config/latest-release
 COVERITY_ID_PASS="telechips07"
 
 source $HERE/colors.sh
@@ -91,9 +93,11 @@ while (( "$#" )); do
                 rm -rf $IDIR_DIR
             fi
 
-            $HERE/clean_lmf.sh $MODULE_NAME
+            #$HERE/clean_lmf.sh $MODULE_NAME
             
-            BUILD="cov-build --dir $IDIR_DIR  --emit-complementary-info --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml $BUILD_CMD"
+            eval $CLEAN_CMD
+            
+            BUILD="cov-build --dir $IDIR_DIR  --emit-complementary-info --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml $BUILD_CMD"
             
             echo -e "${Green}[INFO] #########BUILD START###########${NC}"
 
@@ -111,44 +115,16 @@ while (( "$#" )); do
             fi
 
             exit 1
-            #else
-            #    echo -e "${Red}[ERROR]Error: the coveirty.conf file isn't exist${NC}"
-            #    exit 1
-            #fi
-            ;;
-        -l|--link)
-
-            if [ -d $COVERITY_PLUGIN_DIR ]; then
-                echo -e "${Red}[ERROR] No coverity configs dir for vscode${NC}"
-                exit 1
-            fi
-
-            if [ -d $PLUGIN_IDIR_PATH ]; then
-                rm -rf $PLUGIN_IDIR_PATH
-            fi
-
-            if [ ! -d $IDIR_DIR ]; then
-                echo -e "${Red}Not exist builded Idir dir${NC}" 
-                exit 1
-            fi
-            echo -e "${Green}[INFO] Try to link at plugins dir $IDIR_DIR${NC}"
-            echo -e "${Green}to${NC} ${Blue}$PLUGIN_IDIR_PATH${NC}"
-            ln -s $IDIR_DIR $PLUGIN_IDIR_PATH
-            exit 1
             ;;
         -a|--analysis)
             if [ -d $IDIR_DIR ]; then
-#                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
-                --config $TC_COVERITY_DIR/lmf_coverity_config/coverity_configure_lmf.xml \
+                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
+                --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"
-                
-                COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --parse-warnings-config $CONFIGS_DIR/parse_warnings_telechips_220505.conf"
-                
-                COV_ANALYZE_OPTIONS="$COV_ANALYZE_OPTIONS --dc-config $CONFIGS_DIR/DC_CUSTOM_TELECHIPS_220708.json"
                 
                 cov-analyze $COV_ANALYZE_OPTIONS
             else
@@ -159,9 +135,9 @@ while (( "$#" )); do
         -e|--commit)
             if [ -d $IDIR_DIR ]; then
                 if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
-                    cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $2
+                    cov-commit-defects --dir $IDIR_DIR --url https://coverity.telechips.com:8443 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $2
                 else
-                    cov-commit-defects --dir $IDIR_DIR --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $STREAM_ID
+                    cov-commit-defects --dir $IDIR_DIR --url https://coverity.telechips.com:8443 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --stream $STREAM_ID
                 fi
             else
                 echo -e "${Red}[ERROR] The captured directory does not exist${NC}"
@@ -174,7 +150,7 @@ while (( "$#" )); do
                 echo -e "set stream to ${Green}$STREAM_ID${NC}"
             fi
             if [ $2 == "get" ]; then 
-                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
+                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url https://coverity.telechips.com:8443 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action readFromConnect --report my_findings_report_output.xlsx
                 chmod 777 my_findings_report_output.xlsx
             fi
 
@@ -182,7 +158,7 @@ while (( "$#" )); do
                 cov-manage-findings --dir $IDIR_DIR --priority-filter my_findings_report_output_up.xlsx --action readFromReport --report my_findings_report_output_test.xlsx
             fi
             if [ $2 == "set" ]; then 
-                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url http://coverity.telechips.com:8080 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action sendToConnect --priority-filter my_findings_report_output_up.xlsx
+                cov-manage-findings --dir $IDIR_DIR --stream $STREAM_ID --url https://coverity.telechips.com:8443 --user $COVERITY_ID_PASS --password $COVERITY_ID_PASS --action sendToConnect --priority-filter my_findings_report_output_up.xlsx
             fi
             exit 1
             ;;

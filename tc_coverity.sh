@@ -121,7 +121,7 @@ while (( "$#" )); do
                 COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
-                --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-210714.config \
+                --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-221207.config \
                 --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
                 --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"

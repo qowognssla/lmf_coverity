@@ -118,7 +118,7 @@ while (( "$#" )); do
             ;;
         -a|--analysis)
             if [ -d $IDIR_DIR ]; then
-                COV_ANALYZE_OPTIONS="--dir $IDIR_DIR --disable-default \
+                COV_ANALYZE_OPTIONS=" --dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-221207.config \
@@ -126,7 +126,7 @@ while (( "$#" )); do
                 --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"
                 
-                cov-analyze $COV_ANALYZE_OPTIONS
+                cov-analyze --tu-pattern="file('.*\.c$')" $COV_ANALYZE_OPTIONS
             else
                 echo -e "${Red}[ERROR] The captured directory does not exist${NC}"
             fi

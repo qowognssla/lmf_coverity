@@ -67,7 +67,7 @@ while (( "$#" )); do
                 echo -e "Selected config file is ${Green}"${array[$CONFIG_INDEX]}"${NC}"
 
                 cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/tmp.conf
-                cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
+                #cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
 
                 if [ -d $CODE_BASE_DIR/tc_coverity ]; then
                     echo -e "${Yellow}[WARNNING]already has tc_coverity dir, re-set up${NC}"
@@ -122,7 +122,7 @@ while (( "$#" )); do
                 --strip-path $CODE_BASE_DIR \
                 --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
                 --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-221207.config \
-                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
+                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-231121.config \
                 --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml \
                 @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"
                 

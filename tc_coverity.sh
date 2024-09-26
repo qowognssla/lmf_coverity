@@ -65,7 +65,7 @@ while (( "$#" )); do
                 echo -e "Selected config file is ${Green}"${array[$CONFIG_INDEX]}"${NC}"
 
                 cp -r $TC_COVERITY_DIR/${array[$CONFIG_INDEX]} $CODE_BASE_DIR/tmp.conf
-                cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
+                #cp -r $TC_COVERITY_DIR/coverity.conf $CODE_BASE_DIR/coverity.conf
 
                 if [ -d $CODE_BASE_DIR/tc_coverity ]; then
                     echo -e "${Yellow}[WARNNING]already has tc_coverity dir, re-set up${NC}"

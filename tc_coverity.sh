@@ -16,8 +16,6 @@ source $HERE/colors.sh
 echo -e ${LGreen}[INFO] Base Code Directory${NC} : ${Blue}$CODE_BASE_DIR${NC}
 echo -e ${LGreen}[INFO] Config Directory${NC} : ${Blue}$CONFIGS_DIR${NC}
 
-
-
 STREAM_ID=
 
 if [ -d $COVERITY_PLUGIN_DIR ]; then
@@ -120,13 +118,23 @@ while (( "$#" )); do
             if [ -d $IDIR_DIR ]; then
                 COV_ANALYZE_OPTIONS=" --dir $IDIR_DIR --disable-default \
                 --strip-path $CODE_BASE_DIR \
-                --coding-standard-config $CONFIGS_DIR/cert-c-telechips-220708.config \
-                --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips-221207.config \
-                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips-210728.config \
+                --coding-standard-config $CONFIGS_DIR/cert-c-telechips.config \
+                --coding-standard-config $CONFIGS_DIR/cert-c-recommendation-telechips.config \
+                --coding-standard-config $CONFIGS_DIR/misrac2012-telechips.config \
                 --config /home/coverity/cov-analysis-linux64/config/coverity_config.xml \
-                @@$CONFIGS_DIR/runtime_rules_telechips_220708.txt"
+                @@$CONFIGS_DIR/runtime_rules_telechips.txt"
                 
                 cov-analyze --tu-pattern="file('.*\.c$')" $COV_ANALYZE_OPTIONS
+            else
+                echo -e "${Red}[ERROR] The captured directory does not exist${NC}"
+            fi
+            exit 1
+            ;;
+        -r|--report)
+            if [ -d $IDIR_DIR ]; then
+                export TARGET_PATH_SUBSTRING=$TARGET_PATH_SUBSTRING
+                cov-format-errors --dir $IDIR_DIR --json-output-v10 $CODE_BASE_DIR/tc_results.json
+                python3 $HERE/coverity_get_report.py
             else
                 echo -e "${Red}[ERROR] The captured directory does not exist${NC}"
             fi
@@ -170,6 +178,7 @@ while (( "$#" )); do
              echo " -a : analysis (config dir: $CONFIGS_DIR)"
              echo " -e : commit (parsing from converity.conf, if it has addtional stream_id then will be applied"
              echo " -f : filter"
+             echo " -r : get telechips report"
              echo "      get   : get execl file from stream server. please check telechips wiki https://wiki.telechips.com:8443/pages/viewpage.action?pageId=208798206"
              echo "      check : check the filter is correct"
              echo "      set  : update filter excel (if want to result in web server, please commit after done set"
